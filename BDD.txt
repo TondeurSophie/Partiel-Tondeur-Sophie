@@ -1,0 +1,52 @@
+create database Partiel;
+use Partiel;
+
+create table proprietes(
+    -> id int primary key,
+    -> adresse varchar(50),
+    -> type varchar(50),
+    -> surface varchar(30),
+    -> nb_chambre int,
+    -> prix_location varchar(50),
+    -> etat varchar(50));
+
+alter table proprietes add locataire varchar(100);
+
+create table locataires(
+    -> id int primary key,
+    -> nom varchar(100),
+    -> prenom varchar(100),
+    -> date_naissance Date,
+    -> bancaire varchar(100),
+    -> histo_paiment varchar(500));
+
+ create table contrats_location(
+    -> id int primary key,
+    -> id_propriete int,
+    -> foreign key (id_propriete) references proprietes(id),
+    -> id_locataire int,
+    -> foreign key (id_locataire) references locataires(id),
+    -> date_debut date,
+    -> date_fin date,
+    -> loyer int,
+    -> paiments_effectués varchar(100),
+    -> etat varchar(50));
+
+ create table transaction(
+    -> id int primary key,
+    -> date date,
+    -> type varchar(100),
+    -> montant varchar(100));
+
+insert into proprietes values (1, "adresse","maison","20m3",3,"120","libre","Charles");
+insert into proprietes values (2, "adresse2","appartement","25m3",5,"150","libre","");
+insert into proprietes values (3, "adresse3","maison","20m3",3,"120","occupe","");
+
+insert into locataires values ( 1, "Charles","Henry","2000-01-06","sdfghjk","fgyhj");
+insert into locataires values ( 2, "Tondeur","Sophie","1978-06-04","sdfghjk","fgyhj");
+
+insert into contrats_location values (1, 1, 1, "2000-08-01","2001-03-01", 130, "fghj", "fini");
+insert into contrats_location values (2, 2, 2, "2010-08-01","2024-03-01", 150, "fghj", "en cours");
+
+insert into transaction values (1, "2013-02-01","nouvelle location", "120");
+insert into transaction values (2, "2024-02-01","nouvelle location", "160");
